@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Accueil" component={Home} />
+      <Tab.Screen name="Accueil" component={HomeStack} />
       <Tab.Screen name="Recherche" component={Recherche} />
       <Tab.Screen name="Équipe" component={Equipe} />
       <Tab.Screen name="Paramètres" component={Parametres} />
@@ -28,24 +28,17 @@ const BottomTabNavigator = () => {
   );
 };
 
-const StackScreenNavigator = () => {
+const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="BottomTabs"
-        component={BottomTabNavigator}
+        name="Accueil"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Accueil"
-        component={Home}
-        options={{
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-        }}
-      />
-      {/* Ajoutez d'autres écrans empilables ici si nécessaire */}
+        name="Détails du Pokémon"
+
     </Stack.Navigator>
   );
 };
@@ -53,7 +46,7 @@ const StackScreenNavigator = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <StackScreenNavigator />
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 };
