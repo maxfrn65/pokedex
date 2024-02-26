@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
-import {StyleSheet, View, FlatList, Text, Image} from 'react-native';
+import {StyleSheet, View, FlatList, Text, Image, Pressable} from 'react-native';
 import axios from 'axios';
 
-const Home = () => {
+// @ts-ignore
+const Home = ({navigation}) => {
   const [pokemonList, setPokemonList] = useState(null);
 
   const getData = async () => {
@@ -29,24 +30,30 @@ const Home = () => {
     getData();
   }, []);
 
+  // @ts-ignore
+  const PokemonContainer = ({item}) => {
+    return (
+      <Pressable
+        style={styles.pokemonContainer}
+        onPress={() =>
+          navigation.navigate('Détails', {
+            pokemonName: item.name,
+          })
+        }>
+        <Image source={{uri: item.image}} style={styles.image}></Image>
+        <Text>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
+      </Pressable>
+    );
+  };
+
   return (
     <View style={styles.home}>
       <FlatList
         data={pokemonList}
         numColumns={2}
-        renderItem={PokemonContainer}
+        renderItem={({item}) => <PokemonContainer item={item} />}
         keyExtractor={item => item.name}
       />
-    </View>
-  );
-};
-
-// @ts-ignore
-const PokemonContainer = ({item}) => {
-  return (
-    <View style={styles.pokemonContainer}>
-      <Image source={{uri: item.image}} style={styles.image}></Image>
-      <Text>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
     </View>
   );
 };
@@ -67,15 +74,8 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 10,
     backgroundColor: 'white',
-    shadowColor: '#858585',
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
+    borderWidth: 1,
+    borderColor: '#dedede',
   },
   image: {
     height: 100,
