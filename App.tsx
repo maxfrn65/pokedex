@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { registerRootComponent } from 'expo';
+import {registerRootComponent} from 'expo';
 import {HeaderBackButton} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -16,15 +16,18 @@ import Home from './screens/homeStack/Home.tsx';
 import Search from './screens/Search.tsx';
 import Team from './screens/Team.tsx';
 import Settings from './screens/Settings.tsx';
-import { AppRegistry } from "react-native";
-
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const BottomTabNavigator = () => {
   // @ts-ignore
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+      tabBarActiveTintColor: '#ff0000',
+    }}>
       <Tab.Screen
         name="Pokédex"
         component={HomeStack}
@@ -33,6 +36,9 @@ const BottomTabNavigator = () => {
             backgroundColor: '#ff0000',
           },
           headerTintColor: '#fff',
+          tabBarIcon: ({color}) => (
+            <MaterialCommunityIcon name="pokeball" size={20} color={color}/>
+          ),
         }}
       />
       <Tab.Screen
@@ -43,6 +49,9 @@ const BottomTabNavigator = () => {
             backgroundColor: '#ff0000',
           },
           headerTintColor: '#fff',
+          tabBarIcon: ({color}) => (
+            <IonIcon name="search" size={20} color={color}/>
+          ),
         }}
       />
       <Tab.Screen
@@ -53,6 +62,9 @@ const BottomTabNavigator = () => {
             backgroundColor: '#ff0000',
           },
           headerTintColor: '#fff',
+          tabBarIcon: ({color}) => (
+            <IonIcon name="people" size={20} color={color}/>
+          ),
         }}
       />
       <Tab.Screen
@@ -63,6 +75,9 @@ const BottomTabNavigator = () => {
             backgroundColor: '#ff0000',
           },
           headerTintColor: '#fff',
+          tabBarIcon: ({color}) => (
+            <IonIcon name="settings" size={20} color={color}/>
+          ),
         }}
       />
     </Tab.Navigator>
