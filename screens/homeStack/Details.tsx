@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 
 // @ts-ignore
@@ -24,7 +24,8 @@ const Details = ({route}) => {
 
   if (!pokemonDetails) {
     return (
-      <View>
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator />
         <Text>Loading...</Text>
       </View>
     );
@@ -43,49 +44,20 @@ const Details = ({route}) => {
       />
       <View style={styles.stat_container}>
         <Text style={styles.name}>{pokemonNameUpperCase}</Text>
-        <View style={styles.hr}></View>
+        <View style={styles.hr} />
         <View>
-          {pokemonDetails.types.map(
-            (
-              type: {type: {name: string}},
-              index:
-                | boolean
-                | React.ReactElement<
-                    any,
-                    string | React.JSXElementConstructor<any>
-                  >
-                | Iterable<React.ReactNode>
-                | React.Key
-                | null
-                | undefined,
-            ) => (
-              <Text key={index}>
-                Type {index}:{' '}
-                {type.type.name.charAt(0).toUpperCase() +
-                  type.type.name.slice(1)}
-              </Text>
-            ),
-          )}
+          {pokemonDetails.types.map((type: {type: {name: string}}) => (
+            <Text>
+              {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
+            </Text>
+          ))}
         </View>
-        <View style={styles.hr}></View>
+        <View style={styles.hr} />
         <View>
           {pokemonDetails.abilities.map(
-            (
-              ability: {ability: {name: string}},
-              index:
-                | boolean
-                | React.ReactElement<
-                    any,
-                    string | React.JSXElementConstructor<any>
-                  >
-                | Iterable<React.ReactNode>
-                | React.Key
-                | null
-                | undefined,
-            ) => (
-              <View key={index}>
+            (ability: {ability: {name: string}}) => (
+              <View>
                 <Text>
-                  Ability {index}:{' '}
                   {ability.ability.name.charAt(0).toUpperCase() +
                     ability.ability.name.slice(1)}
                 </Text>
@@ -93,15 +65,21 @@ const Details = ({route}) => {
             ),
           )}
         </View>
-        <View style={styles.hr}></View>
-        <Text>Height: {pokemonDetails.height} Decimeters</Text>
-        <Text>Weight: {pokemonDetails.weight} Hectograms</Text>
+        <View style={styles.hr} />
+        <Text>Height: {pokemonDetails.height}dm</Text>
+        <Text>Weight: {pokemonDetails.weight}hg</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 20,
+  },
   details_container: {
     flex: 1,
     alignItems: 'center',

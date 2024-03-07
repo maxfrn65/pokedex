@@ -4,14 +4,15 @@ import axios from 'axios';
 
 // @ts-ignore
 const Home = ({navigation}) => {
-  const [pokemonList, setPokemonList] = useState(null);
+  const [pokemonList, setPokemonList] = useState([]);
+  const [nextPage, setNextPage] = useState('');
 
-  const getData = async () => {
+  const fetchData = async url => {
     try {
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon/');
-      const pokemons = response.data.results;
+      const response = await axios.get(url);
+      const {results, next} = response.data;
       const pokemonData = await Promise.all(
-        pokemons.map(async (pokemon: {url: string; name: any}) => {
+        results.map(async pokemon => {
           const pokemonResponse = await axios.get(pokemon.url);
           return {
             name: pokemon.name,
@@ -19,20 +20,25 @@ const Home = ({navigation}) => {
           };
         }),
       );
-      // @ts-ignore
-      setPokemonList(pokemonData);
+      setPokemonList(prevList => [...prevList, ...pokemonData]);
+      setNextPage(next);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    getData();
+    fetchData('https://pokeapi.co/api/v2/pokemon/');
   }, []);
+
+  const loadMoreData = () => {
+    if (nextPage) {
+      fetchData(nextPage);
+    }
+  };
 
   // @ts-ignore
   const PokemonContainer = ({item}) => {
-    const [selected, setSelected] = useState(false)
     return (
       <Pressable
         style={styles.pokemonContainer}
@@ -41,7 +47,7 @@ const Home = ({navigation}) => {
             pokemonName: item.name,
           })
         }>
-        <Image source={{uri: item.image}} style={styles.image}></Image>
+        <Image source={{uri: item.image}} style={styles.image} />
         <Text>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</Text>
       </Pressable>
     );
@@ -54,6 +60,8 @@ const Home = ({navigation}) => {
         numColumns={2}
         renderItem={({item}) => <PokemonContainer item={item} />}
         keyExtractor={item => item.name}
+        onEndReached={loadMoreData}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );
