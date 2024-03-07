@@ -5,16 +5,16 @@
  * @format
  */
 
-import React, { useEffect } from "react";
+import React from 'react';
 import {HeaderBackButton} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Details from './screens/homeStack/Details.tsx';
 import Home from './screens/homeStack/Home.tsx';
-import Recherche from './screens/Recherche.tsx';
-import Equipe from './screens/Equipe.tsx';
-import Parametres from './screens/Parametres.tsx';
+import Search from './screens/Search.tsx';
+import Team from './screens/Team.tsx';
+import Settings from './screens/Settings.tsx';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -33,9 +33,36 @@ const BottomTabNavigator = () => {
           headerTintColor: '#fff',
         }}
       />
-      <Tab.Screen name="Recherche" component={Recherche} />
-      <Tab.Screen name="Équipe" component={Equipe} />
-      <Tab.Screen name="Paramètres" component={Parametres} />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          headerStyle: {
+            backgroundColor: '#ff0000',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Tab.Screen
+        name="Team"
+        component={Team}
+        options={{
+          headerStyle: {
+            backgroundColor: '#ff0000',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerStyle: {
+            backgroundColor: '#ff0000',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -52,7 +79,7 @@ const HomeStack = ({navigation}) => {
         }}
       />
       <Stack.Screen
-        name="Détails"
+        name="Details"
         component={Details}
         options={{
           headerStyle: {
@@ -62,7 +89,6 @@ const HomeStack = ({navigation}) => {
           headerLeft: () => (
             <HeaderBackButton
               onPress={() => navigation.goBack()}
-              label="Retour"
               tintColor={'#fff'}
             />
           ),

@@ -32,11 +32,12 @@ const Home = ({navigation}) => {
 
   // @ts-ignore
   const PokemonContainer = ({item}) => {
+    const [selected, setSelected] = useState(false)
     return (
       <Pressable
         style={styles.pokemonContainer}
         onPress={() =>
-          navigation.navigate('Détails', {
+          navigation.navigate('Details', {
             pokemonName: item.name,
           })
         }>
