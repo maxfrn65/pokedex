@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { registerRootComponent } from 'expo';
 import {HeaderBackButton} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -15,6 +16,7 @@ import Home from './screens/homeStack/Home.tsx';
 import Search from './screens/Search.tsx';
 import Team from './screens/Team.tsx';
 import Settings from './screens/Settings.tsx';
+import { AppRegistry } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -106,4 +108,5 @@ const App = () => {
   );
 };
 
+registerRootComponent(App);
 export default App;
