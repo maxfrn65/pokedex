@@ -7,12 +7,12 @@ const Home = ({navigation}) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [nextPage, setNextPage] = useState('');
 
-  const fetchData = async url => {
+  const fetchData = async (url: string) => {
     try {
       const response = await axios.get(url);
       const {results, next} = response.data;
       const pokemonData = await Promise.all(
-        results.map(async pokemon => {
+        results.map(async (pokemon: {url: string; name: any}) => {
           const pokemonResponse = await axios.get(pokemon.url);
           return {
             name: pokemon.name,
@@ -20,6 +20,7 @@ const Home = ({navigation}) => {
           };
         }),
       );
+      // @ts-ignore
       setPokemonList(prevList => [...prevList, ...pokemonData]);
       setNextPage(next);
     } catch (error) {

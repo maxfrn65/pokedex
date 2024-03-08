@@ -11,13 +11,14 @@ import {HeaderBackButton} from '@react-navigation/elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Details from './screens/homeStack/Details.tsx';
 import Home from './screens/homeStack/Home.tsx';
-import Search from './screens/Search.tsx';
+import HomeDetails from './screens/homeStack/HomeDetails.tsx';
+import Search from './screens/searchStack/Search.tsx';
 import Team from './screens/Team.tsx';
 import Settings from './screens/Settings.tsx';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import SearchDetails from "./screens/searchStack/SearchDetails.tsx";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +27,8 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-      tabBarActiveTintColor: '#ff0000',
-    }}>
+        tabBarActiveTintColor: '#ff0000',
+      }}>
       <Tab.Screen
         name="Pokédex"
         component={HomeStack}
@@ -43,7 +44,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Search"
-        component={Search}
+        component={SearchStack}
         options={{
           headerStyle: {
             backgroundColor: '#ff0000',
@@ -97,7 +98,38 @@ const HomeStack = ({navigation}) => {
       />
       <Stack.Screen
         name="Details"
-        component={Details}
+        component={HomeDetails}
+        options={{
+          headerStyle: {
+            backgroundColor: '#d50000',
+          },
+          headerTintColor: '#fff',
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => navigation.goBack()}
+              tintColor={'#fff'}
+            />
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+// @ts-ignore
+const SearchStack = ({navigation}) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SearchDetails"
+        component={SearchDetails}
         options={{
           headerStyle: {
             backgroundColor: '#d50000',

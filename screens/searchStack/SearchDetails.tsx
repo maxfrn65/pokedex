@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
 import axios from 'axios';
 
 // @ts-ignore
-const Details = ({route}) => {
+const SearchDetails = ({route}) => {
   const {pokemonName} = route.params;
   const [pokemonDetails, setPokemonDetails] = useState(null);
 
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Details;
+export default SearchDetails;
