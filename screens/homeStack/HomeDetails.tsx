@@ -46,18 +46,21 @@ const HomeDetails = ({route}) => {
         <Text style={styles.name}>{pokemonNameUpperCase}</Text>
         <View style={styles.hr} />
         <View>
-          {pokemonDetails.types.map((type: {type: {name: string}}) => (
-            <Text>
-              {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
-            </Text>
-          ))}
+          {pokemonDetails.types.map(
+            (type: {type: {name: string}}, index: number) => (
+              <Text key={index}>
+                {type.type.name.charAt(0).toUpperCase() +
+                  type.type.name.slice(1)}
+              </Text>
+            ),
+          )}
         </View>
         <View style={styles.hr} />
         <View>
           {pokemonDetails.abilities.map(
-            (ability: {ability: {name: string}}) => (
+            (ability: {ability: {name: string}}, index: number) => (
               <View>
-                <Text>
+                <Text key={index}>
                   {ability.ability.name.charAt(0).toUpperCase() +
                     ability.ability.name.slice(1)}
                 </Text>
