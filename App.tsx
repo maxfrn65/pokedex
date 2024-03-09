@@ -18,7 +18,7 @@ import Team from './screens/Team.tsx';
 import Settings from './screens/Settings.tsx';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import SearchDetails from "./screens/searchStack/SearchDetails.tsx";
+import SearchDetails from './screens/searchStack/SearchDetails.tsx';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +38,7 @@ const BottomTabNavigator = () => {
           },
           headerTintColor: '#fff',
           tabBarIcon: ({color}) => (
-            <MaterialCommunityIcon name="pokeball" size={20} color={color}/>
+            <MaterialCommunityIcon name="pokeball" size={20} color={color} />
           ),
         }}
       />
@@ -51,7 +51,7 @@ const BottomTabNavigator = () => {
           },
           headerTintColor: '#fff',
           tabBarIcon: ({color}) => (
-            <IonIcon name="search" size={20} color={color}/>
+            <IonIcon name="search" size={20} color={color} />
           ),
         }}
       />
@@ -64,7 +64,7 @@ const BottomTabNavigator = () => {
           },
           headerTintColor: '#fff',
           tabBarIcon: ({color}) => (
-            <IonIcon name="people" size={20} color={color}/>
+            <IonIcon name="people" size={20} color={color} />
           ),
         }}
       />
@@ -128,8 +128,8 @@ const SearchStack = ({navigation}) => {
         }}
       />
       <Stack.Screen
-        name="SearchDetails"
-        component={SearchDetails}
+        name="Details"
+        component={HomeDetails}
         options={{
           headerStyle: {
             backgroundColor: '#d50000',
