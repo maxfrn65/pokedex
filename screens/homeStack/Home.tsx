@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   home: {
     flex: 2,
     marginHorizontal: 'auto',
-    width: 385,
+    width: '100%',
     backgroundColor: 'white',
   },
   pokemonContainer: {
