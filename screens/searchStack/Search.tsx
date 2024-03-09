@@ -3,7 +3,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {StyleSheet, View, Text, FlatList, Image, Pressable} from 'react-native';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import { color } from "react-native-elements/dist/helpers";
 
 // @ts-ignore
 const Search = ({navigation}) => {
@@ -51,7 +50,7 @@ const Search = ({navigation}) => {
 
   const filteredResults = () => {
     return searchResults.filter(pokemon => {
-      return pokemon.name.toLowerCase().includes(search);
+      return pokemon.name.toLowerCase().includes(search.toLowerCase());
     });
   };
 
@@ -61,7 +60,7 @@ const Search = ({navigation}) => {
       <Pressable
         style={styles.pokemonContainer}
         onPress={() =>
-          navigation.navigate('SearchDetails', {
+          navigation.navigate('Details', {
             pokemonName: item.name,
           })
         }>
@@ -71,8 +70,6 @@ const Search = ({navigation}) => {
     );
   };
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <>
       <View>
@@ -111,11 +108,11 @@ const Search = ({navigation}) => {
             </Text>
           </View>
         )}
-        {search.length !== 0 && searchResults.length === 0 && (
+        {search.length !== 0 && filteredResults().length === 0 && (
           <View style={styles.noInputView}>
-            <Icon name="close-circle" size={40} color={'white'} />
+            <Icon name="close-circle" size={40} color={'#dedede'} />
             <Text style={{color: '#dedede', fontSize: 20, fontWeight: 'bold'}}>
-              No Resulsts for {search}
+              No Results for {search}
             </Text>
           </View>
         )}
@@ -165,7 +162,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 20
+    gap: 20,
   },
 });
 
