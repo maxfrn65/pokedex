@@ -128,8 +128,8 @@ const SearchStack = ({navigation}) => {
         }}
       />
       <Stack.Screen
-        name="Details"
-        component={HomeDetails}
+        name="Search Details"
+        component={SearchDetails}
         options={{
           headerStyle: {
             backgroundColor: '#d50000',
