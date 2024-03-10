@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   details_container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   name: {
     fontWeight: 'bold',
