@@ -60,7 +60,7 @@ const Search = ({navigation}) => {
       <Pressable
         style={styles.pokemonContainer}
         onPress={() =>
-          navigation.navigate('Details', {
+          navigation.navigate('Search Details', {
             pokemonName: item.name,
           })
         }>
