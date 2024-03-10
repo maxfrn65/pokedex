@@ -58,7 +58,7 @@ const Home = ({navigation}) => {
     <View style={styles.home}>
       <FlatList
         data={pokemonList}
-        numColumns={2}
+        numColumns={3}
         renderItem={({item}) => <PokemonContainer item={item} />}
         keyExtractor={item => item.name}
         onEndReached={loadMoreData}
@@ -70,7 +70,7 @@ const Home = ({navigation}) => {
 
 const styles = StyleSheet.create({
   home: {
-    flex: 2,
+    flex: 3,
     marginHorizontal: 'auto',
     width: '100%',
     backgroundColor: 'white',
